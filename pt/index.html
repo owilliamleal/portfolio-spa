@@ -1,0 +1,496 @@
+<!-- 
+    PORTFOLIO PROJECT - EDUCATIONAL DOCUMENTATION
+    =============================================
+    This is the main HTML file (HyperText Markup Language).
+    It defines the structure and content of the webpage.
+    Top-level tags:
+    - <html>: Root element.
+    - <head>: Metadata (not visible on page).
+    - <body>: Visible content.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Paint Priority: Browser UI color (prevents white address bar flash) -->
+    <meta name="theme-color" content="#1a1a1a">
+    <!-- Viewport: Essential for mobile responsiveness. Ensures the site scales to the device screen width. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Video editing and everything you need for your work to get recognized online">
+    <title>William Leal | Audiovisual</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/logo_william_leal_av.svg">
+
+    <!-- International SEO - Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://owilliamleal.github.io/portfolio-spa/">
+    <link rel="alternate" hreflang="pt" href="https://owilliamleal.github.io/portfolio-spa/pt/">
+    <link rel="alternate" hreflang="es" href="https://owilliamleal.github.io/portfolio-spa/es/">
+    <link rel="alternate" hreflang="x-default" href="https://owilliamleal.github.io/portfolio-spa/">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="William Leal | Audiovisual">
+    <meta property="og:description"
+        content="Video editing and everything you need for your work to get recognized online">
+
+    <!-- Google Fonts: Import external fonts (Quicksand) for better typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- CRITICAL: White Render Block - Prevents flash on local file system -->
+    <style>
+        /* Force dark background at root level with maximum priority */
+        :root {
+            background-color: #1a1a1a !important;
+        }
+
+        html {
+            background-color: #1a1a1a !important;
+        }
+
+        /* Hide body until JS reveals it (prevents FOUC) */
+        body {
+            visibility: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        /* Light mode override (applied by JS) */
+        html[data-theme="light"] {
+            background-color: #fff4ca !important;
+        }
+
+        html[data-theme="light"] body {
+            background-color: #fff4ca;
+            color: #1a1a1a;
+        }
+    </style>
+
+    <!-- Theme Initialization: Must run before body renders -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'light') {
+                document.documentElement.style.backgroundColor = '#fff4ca';
+            }
+        })();
+    </script>
+
+    <!-- Styles: Link to our external CSS file where all visual styling resides -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/social.css">
+</head>
+
+<body>
+    <!-- Instant Reveal Script: Make body visible immediately -->
+    <script>document.body.style.visibility = 'visible';</script>
+    <!-- 
+        HEADER SECTION
+        Contains the logo, navigation menu, and action buttons (Language, Theme).
+        'position: sticky' in CSS makes it stay at the top when scrolling.
+    -->
+    <header id="header">
+        <div class="container header-content">
+            <!-- Logo area -->
+            <a href="#hero" class="logo" aria-label="Back to Top">
+                <img src="../assets/logo_william_leal_av.svg" alt="William Leal Logo" class="logo-icon" width="48"
+                    height="48">
+                <div class="logo-text">
+                    <h1>WILLIAM LEAL</h1>
+                    <span class="logo-subtitle">AUDIOVISUAL</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation: Hidden on mobile via CSS media queries -->
+            <nav class="desktop-nav">
+                <ul>
+                    <!-- data-i18n attributes are used by JS to replace text when language changes -->
+                    <li><a href="#hero" data-i18n="nav_home">Início</a></li>
+                    <li><a href="#portfolio" data-i18n="nav_portfolio">Portfólio</a></li>
+                    <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+                    <li><a href="#services" data-i18n="nav_services">Serviços</a></li>
+                    <li><a href="#clients" data-i18n="nav_clients">Clientes</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contato</a></li>
+                </ul>
+            </nav>
+
+            <!-- Action Buttons: Theme Toggle, Language Toggle, Mobile Menu Trigger -->
+            <div class="actions">
+                <button id="lang-toggle" class="pulse-anim" aria-label="Mudar Idioma">
+                    <span id="current-lang">PT</span>
+                </button>
+                <button id="theme-toggle" aria-label="Alternar Tema">
+                    <!-- SVG Icons for Sun/Moon. JS toggles their visibility. -->
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display:none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <!-- Hamburger Menu Button: Visible only on mobile -->
+                <button id="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+        MOBILE MENU OVERLAY
+        Full-screen menu content for mobile users.
+        Toggled by removing/adding 'transform: translateX' in CSS via JS.
+    -->
+    <div id="mobile-menu" class="mobile-menu">
+        <nav>
+            <ul>
+                <li><a href="#hero" class="mobile-link" data-i18n="nav_home">Início</a></li>
+                <li><a href="#portfolio" class="mobile-link" data-i18n="nav_portfolio">Portfólio</a></li>
+                <li><a href="#about" class="mobile-link" data-i18n="nav_about">Sobre</a></li>
+                <li><a href="#services" class="mobile-link" data-i18n="nav_services">Serviços</a></li>
+                <li><a href="#clients" class="mobile-link" data-i18n="nav_clients">Clientes</a></li>
+                <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <!-- 
+            HERO SECTION
+            The first visual section users see.
+            Uses a background image with an overlay for text readability.
+        -->
+        <section id="hero" class="hero-section">
+            <div class="hero-bg" style="background-image: url('../assets/hero-bg-studio.webp');"></div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h2 data-i18n="hero_title">Serviços que valorizam seu tempo</h2>
+                <p data-i18n="hero_subtitle">Edições que valorizam seus projetos</p>
+                <a href="#services" class="btn btn-hero-cta" data-i18n="hero_cta">Ver serviços</a>
+            </div>
+        </section>
+
+        <!-- 
+            PORTFOLIO GRID
+            Uses "Bento Grid" layout (CSS Grid).
+            Each .bento-item is a clickable project card.
+        -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="section_portfolio">Portfólio</h2>
+
+                <div class="bento-grid">
+                    <!-- Box 1: Featured Project (Spans 2 columns) -->
+                    <div class="bento-item" data-type="video" onclick="openModal('video1')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/video_edt.webp"
+                                alt="Edição de vídeo profissional - Shorts e Reels" class="bento-img">
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="bento-text text-always-visible">
+                            <h3 data-i18n="project_1_title">Edição de vídeo</h3>
+                            <p data-i18n="project_1_desc">Shorts & Reels</p>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: Identidade Visual -->
+                    <div class="bento-item" data-type="gallery" onclick="openModal('proj2')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/identidade_visual.webp"
+                                alt="Projetos de Identidade Visual e Branding" class="bento-img">
+                        </div>
+                        <div class="bento-text text-hover">
+                            <h3 data-i18n="project_2_title">Identidade Visual</h3>
+                        </div>
+                    </div>
+
+                    <!-- Box 3 -->
+                    <div class="bento-item" data-type="gallery" onclick="openModal('social')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/social_media.webp"
+                                alt="Design para Social Media e Redes Sociais" class="bento-img">
+                        </div>
+                        <div class="bento-text text-hover">
+                            <h3 data-i18n="project_3_title">Social Media</h3>
+                        </div>
+                    </div>
+
+                    <!-- Box 4 -->
+                    <div class="bento-item" data-type="gallery" onclick="openModal('proj4', 'Logo marcas')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/logo.webp" alt="Criação de Logomarcas e Logos"
+                                class="bento-img">
+                        </div>
+                        <div class="bento-text text-hover">
+                            <h3 data-i18n="project_4_title">Logo marcas</h3>
+                        </div>
+                    </div>
+
+                    <!-- Box 5 -->
+                    <div class="bento-item" data-type="gallery" onclick="openModal('proj5', 'Web sites')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/site.webp" alt="Desenvolvimento de Websites e Interfaces"
+                                class="bento-img">
+                        </div>
+                        <div class="bento-text text-hover">
+                            <h3 data-i18n="project_5_title">Web sites</h3>
+                        </div>
+                    </div>
+
+                    <!-- Box 6 -->
+                    <div class="bento-item" data-type="gallery" onclick="openModal('proj6', 'Ilustrações')">
+                        <div class="bento-visual">
+                            <img src="../assets/thumbnail/arte.webp" alt="Ilustrações Digitais e Arte Personalizada"
+                                class="bento-img">
+                        </div>
+                        <div class="bento-text text-hover">
+                            <h3 data-i18n="project_6_title">Ilustrações</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            ABOUT SECTION
+            Simple text layout describing the professional background.
+        -->
+        <section id="about" class="section">
+            <div class="container about-container">
+                <div class="about-text">
+                    <h2 class="section-title" data-i18n="section_about">Quem Sou</h2>
+                    <p data-i18n="about_text_1">Desde os 12 anos, quando criei minha primeira divulgação, o audiovisual
+                        se tornou minha paixão. Mesmo tendo iniciado minha trajetória na arquitetura, em 2022 decidi
+                        seguir de vez pelo caminho criativo do audiovisual.</p>
+                    <p data-i18n="about_text_2">Hoje, produzo conteúdos para YouTube e redes sociais e desenvolvo sites
+                        com foco em marketing digital, sempre buscando unir estratégia e criatividade.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            SERVICES SECTION
+            Duplicated from About section.
+        -->
+        <section id="services" class="section">
+            <div class="container about-container">
+                <div class="about-text">
+                    <h2 class="section-title" data-i18n="section_services">Serviços</h2>
+                    <p data-i18n="service_1"><strong>Edição de vídeo:</strong> Vídeos para YouTube, redes sociais e
+                        corporativos. Produção de
+                        vinhetas, transições e assets animados em vídeo.</p>
+                    <p data-i18n="service_2"><strong>Design & Web:</strong> Identidade visual, logomarcas, design para
+                        interfaces e websites.
+                    </p>
+                    <p data-i18n="service_3"><strong>Social Media:</strong> Produção de conteúdo estratégico para redes
+                        sociais e
+                        gerenciamento de perfis.</p>
+                    <p data-i18n="service_4"><strong>Ilustrações para:</strong> Livros, estampas, stickers e arte
+                        digital.</p>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="#contact" class="btn btn-hero-cta pulse-anim-gold" data-i18n="services_cta">Faça seu
+                            orçamento</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            CLIENTS SECTION
+            Displays client cards with social handles.
+            Uses JS to simulate lazy loading of "widgets".
+        -->
+        <section id="clients" class="section">
+            <div class="container">
+                <h2 class="section-title">Clientes</h2>
+                <div class="clients-grid">
+                    <!-- Client 1 -->
+                    <div class="client-group">
+                        <div class="client-scroll-box">
+                            <img src="../assets/clientes/1.webp" alt="Trabalho realizado para @teachermaryhollywood">
+                        </div>
+                        <p class="client-caption">@teachermaryhollywood</p>
+                    </div>
+
+                    <!-- Client 2 -->
+                    <div class="client-group">
+                        <div class="client-scroll-box">
+                            <img src="../assets/clientes/2.webp" alt="Trabalho realizado para @luizahpersonal">
+                        </div>
+                        <p class="client-caption">@luizahpersonal</p>
+                    </div>
+
+                    <!-- Client 3 -->
+                    <div class="client-group">
+                        <div class="client-scroll-box">
+                            <img src="../assets/clientes/3.webp" alt="Trabalho realizado para @sindicojabh">
+                        </div>
+                        <p class="client-caption">@sindicojabh</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+            CTA (Call To Action) SECTION
+            Encourages the user to contact via messaging apps.
+        -->
+        <section id="contact" class="section cta-section">
+            <div class="container" id="contato">
+                <h2 data-i18n="cta_title">Vamos criar algo incrível juntos?</h2>
+                <div class="contact-box">
+                    <a href="https://wa.me/5531989566719" class="btn btn-contact btn-whatsapp" target="_blank"
+                        rel="noopener noreferrer">Falar por WhatsApp</a>
+                    <a href="https://t.me/+5531989566719" class="btn btn-contact btn-telegram" target="_blank"
+                        rel="noopener noreferrer">Falar por Telegram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61577000556529"
+                        class="btn btn-contact btn-messenger" target="_blank" rel="noopener noreferrer">Falar por
+                        Messenger</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-nav">
+                <a href="#hero" data-i18n="nav_home">Início</a>
+                <a href="#portfolio" data-i18n="nav_portfolio">Portfólio</a>
+                <a href="#about" data-i18n="nav_about">Sobre</a>
+                <a href="#services" data-i18n="nav_services">Serviços</a>
+                <a href="#clients" data-i18n="nav_clients">Clientes</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-icon" aria-label="Instagram">IG</a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">IN</a>
+                <a href="#" class="social-icon" aria-label="YouTube">YT</a>
+            </div>
+            <p class="copyright">© 2024 Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 
+        PROJECT MODAL
+        Hidden by default. Pops up when a project is clicked.
+        Contains a 'viewer-container' where content is injected by JS.
+    -->
+    <div id="project-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Fechar Modal">&times;</button>
+            <div class="modal-body">
+                <!-- Content injected via JS matches the clicked project -->
+                <div id="modal-viewer-container" class="viewer-container">
+                    <div class="placeholder-viewer">
+                        <p>Visualizador de Conteúdo</p>
+                    </div>
+                </div>
+
+                <div class="modal-gallery-strip">
+                    <!-- Thumbnails for internal gallery navigation -->
+                    <button class="strip-thumb active"></button>
+                    <button class="strip-thumb"></button>
+                    <button class="strip-thumb"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 
+        FAB (Floating Action Button) CONTAINER
+        The expanded menu for contact options (Whatsapp, Telegram, Messenger).
+        Stays fixed at the bottom right corner.
+    -->
+    <div class="fab-container">
+        <div class="fab-menu" id="fab-menu" aria-hidden="true">
+            <button class="fab-option" data-app="whatsapp" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-message-circle">
+                    <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                    </path>
+                </svg>
+            </button>
+            <button class="fab-option" data-app="telegram" aria-label="Telegram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-send">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+            <button class="fab-option" data-app="messenger" aria-label="Messenger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-zap">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+            </button>
+        </div>
+
+        <div class="fab-main-wrapper">
+            <button id="fab-main" class="fab-main" aria-label="Contact">
+                <!-- Icon will be injected by JS -->
+                <svg id="fab-icon-svg" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                    fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+            </button>
+            <button id="fab-trigger" class="fab-trigger" aria-label="Expand Options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 
+        LIGHTBOX OVERLAY
+        Full screen image viewer.
+    -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="close-lightbox" aria-label="Fechar">&times;</button>
+
+        <button class="lightbox-arrow lightbox-arrow-left" id="lb-prev" aria-label="Imagem Anterior">
+            <svg class="arrow-icon" viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <img class="lightbox-content" id="lightbox-img" alt="Full Screen View">
+
+        <button class="lightbox-arrow lightbox-arrow-right" id="lb-next" aria-label="Próxima Imagem">
+            <svg class="arrow-icon" viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Scripts: Link to the external JavaScript file where logic resides -->
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
