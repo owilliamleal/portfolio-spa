@@ -1,76 +1,47 @@
 /* 
    PORTFOLIO STYLESHEET
    ====================
-   This file controls the visual appearance of the website.
-   It uses CSS (Cascading Style Sheets).
+   Author: William Leal Portfolio
+   Description: Centralized, mobile-first styles for the portfolio.
 */
 
-/* 
-   FONTS IMPORT
-   We import 'Quicksand' from Google Fonts to give the site a friendly, modern look.
-*/
+/* --- 1. FONTS & VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
 
-/* 
-   VARIABLES (:root)
-   These are CSS Custom Properties. They act like variables holding colors, 
-   spacing units, and common values. Changing them here updates the whole site.
-*/
 :root {
     /* Colors - Light Theme (Default) */
     --primary: #5a0069;
-    /* Main brand color (Deep Purple) */
     --accent: #ffde59;
-    /* Highlight color (Yellow) */
     --bg-body: #fff4ca;
-    /* Background color for the page */
     --bg-card: #ffffff;
-    /* Background color for boxes/cards */
     --text-main: #1a1a1a;
-    /* Main text color */
     --text-muted: #555555;
-    /* Secondary text color */
     --border: #e0e0e0;
-    /* Border color */
 
-    /* Dimensions - Reusable border radii */
+    /* Spacing & Radii */
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 8px;
-
-    /* Spacing */
-    --spacing-container: 1200px;
-    /* Max width of the content area */
     --header-height: 80px;
+    --container-width: 1200px;
+    --gap-standard: 20px;
 
-    /* Transitions - Standard animation timing */
+    /* Transitons */
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* 
-   DARK MODE OVERRIDES
-   When the <html> tag has data-theme="dark" (set by JS), 
-   these variables overwrite the defaults above.
-*/
+/* Dark Mode Overrides */
 [data-theme="dark"] {
     --primary: #cba3d4;
-    /* Lighter purple for visibility on dark backgrounds */
     --accent: #ffde59;
     --bg-body: #1a1a1a;
-    /* Dark background */
     --bg-card: #2a2a2a;
-    /* Darker cards */
     --text-main: #f0f0f0;
-    /* Light text */
     --text-muted: #cccccc;
     --border: #444444;
 }
 
-/* 
-   RESET
-   Removes default browser margins/paddings and ensures 
-   padding/border is included in element width updates (box-sizing).
-*/
+/* --- 2. RESET & BASE --- */
 * {
     margin: 0;
     padding: 0;
@@ -79,152 +50,25 @@
 
 html {
     scroll-behavior: smooth;
-    /* Enables smooth scrolling when clicking anchor links */
 }
 
 body {
     font-family: 'Quicksand', sans-serif;
     background-color: var(--bg-body);
     color: var(--text-main);
-    transition: background-color 0.4s ease, color 0.4s ease;
-    /* Smooth theme switch */
     line-height: 1.6;
-}
-
-/* 
-   LAYOUT UTILITIES
-*/
-.container {
-    max-width: var(--spacing-container);
-    margin: 0 auto;
-    /* Centers the container horizontally */
-    padding: 0 20px;
-    /* Adds safety padding on sides for mobile */
-}
-
-/* Typography */
-h1,
-h2,
-h3 {
-    font-weight: 700;
-}
-
-p {
-    font-weight: 400;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll on mobile */
 }
 
 a {
     text-decoration: none;
-    /* Removes default underline */
     color: inherit;
-    /* Inherits text color of parent */
 }
 
-/* 
-   HEADER
-   Sticky navigation bar at the top.
-*/
-header {
-    height: var(--header-height);
-    position: sticky;
-    /* Sticks to top when scrolling */
-    top: 0;
-    z-index: 1000;
-    /* Ensures it stays above other content */
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    /* Frosted glass effect */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: background 0.4s ease;
-}
-
-[data-theme="dark"] header {
-    background: rgba(26, 26, 26, 0.9);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.header-content {
-    display: flex;
-    /* Enables Flexbox layout */
-    justify-content: space-between;
-    /* Spreads items to edges */
-    align-items: center;
-    /* Vertically centers items */
-    height: 100%;
-}
-
-/* Logo */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    /* Spacing between icon and text block */
-    text-decoration: none;
-    /* Remove underline from link */
-    cursor: pointer;
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Center horizontally relative to each other */
-    line-height: 1;
-}
-
-.logo h1 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    letter-spacing: -0.5px;
-    margin: 0;
-}
-
-.logo-subtitle {
-    font-size: 0.7rem;
-    /* Smaller font */
-    font-weight: 300;
-    /* Thin font */
-    color: var(--text-muted);
-    letter-spacing: 2px;
-    /* Spread out letters */
-    text-transform: uppercase;
-    margin-top: 3px;
-    width: 80%;
-    /* 80% width relative to container */
-    text-align: center;
-    line-height: 1;
-}
-
-.logo-icon {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-}
-
-/* Navigation Links */
-.desktop-nav ul {
-    display: flex;
-    gap: 30px;
+ul {
     list-style: none;
-}
-
-.desktop-nav a {
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.2s;
-}
-
-.desktop-nav a:hover,
-.desktop-nav a.active {
-    color: var(--primary);
-    font-weight: 700;
-}
-
-/* Header Actions (Buttons) */
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
 }
 
 button {
@@ -235,16 +79,47 @@ button {
     color: var(--text-main);
 }
 
-/* 
-   BUTTON STYLES
-   Reusable classes for buttons throughout the site.
-*/
+/* --- 3. UTILITIES --- */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 60px 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* --- 4. COMPONENTS --- */
+
+/* Buttons */
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 12px 28px;
     border-radius: 50px;
     font-weight: 700;
     transition: var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-cta {
+    background-color: var(--accent);
+    color: #1a1a1a;
 }
 
 .btn-primary {
@@ -252,55 +127,51 @@ button {
     color: white;
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    /* Moves slightly up on hover */
-    box-shadow: 0 5px 15px rgba(90, 0, 105, 0.3);
-}
-
-.btn-whatsapp {
-    background-color: #25D366;
-    color: white;
-}
-
-.btn-contact {
-    display: inline-flex;
+/* Logo */
+.logo {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 200px;
+    gap: 10px;
 }
 
-.btn-hero-cta {
-    background-color: #FFDE59;
-    color: #1a1a1a;
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
-.btn-hero-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 222, 89, 0.4);
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
 }
 
-.btn-whatsapp:hover {
-    background-color: #1ebc57;
-    transform: scale(1.05);
-}
-
-/* Language Toggle Button */
-#lang-toggle {
-    font-weight: 700;
-    padding: 5px 12px;
-    border: 2px solid var(--primary);
-    border-radius: 20px;
+.logo h1 {
     color: var(--primary);
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
 }
 
-/* Pulse Animation for attention */
+.logo-subtitle {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Animations */
 .pulse-anim {
     animation: pulse 2s infinite;
 }
 
+.pulse-anim-gold {
+    animation: pulse-gold 2s infinite;
+}
+
 @keyframes pulse {
-    0% {
+
+    0%,
+    100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(90, 0, 105, 0.4);
     }
@@ -309,19 +180,12 @@ button {
         transform: scale(1.05);
         box-shadow: 0 0 0 10px rgba(90, 0, 105, 0);
     }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(90, 0, 105, 0);
-    }
-}
-
-.pulse-anim-gold {
-    animation: pulse-gold 2s infinite;
 }
 
 @keyframes pulse-gold {
-    0% {
+
+    0%,
+    100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 222, 89, 0.7);
     }
@@ -330,26 +194,62 @@ button {
         transform: scale(1.05);
         box-shadow: 0 0 0 10px rgba(255, 222, 89, 0);
     }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 222, 89, 0);
-    }
 }
 
-.pulse-anim-slow {
-    animation: pulse 3s infinite;
+/* --- 5. LAYOUT --- */
+
+/* Header */
+header {
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.4s ease;
 }
 
-/* 
-   MOBILE MENU (Hamburger)
-   Hidden by default on desktop, shown via JS on mobile.
-*/
-#mobile-menu-btn {
+[data-theme="dark"] header {
+    background: rgba(26, 26, 26, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+/* Navigation - Mobile First (Hidden) */
+.desktop-nav {
     display: none;
-    /* Hidden on desktop */
+    /* Hidden on mobile */
+}
+
+/* Header Actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#lang-toggle {
+    font-weight: 700;
+    padding: 5px 10px;
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    color: var(--primary);
+    font-size: 0.8rem;
+}
+
+/* Mobile Menu Button */
+#mobile-menu-btn {
+    display: flex;
     flex-direction: column;
     gap: 5px;
+    padding: 5px;
 }
 
 #mobile-menu-btn span {
@@ -359,6 +259,7 @@ button {
     border-radius: 2px;
 }
 
+/* Mobile Menu Overlay */
 .mobile-menu {
     position: fixed;
     top: var(--header-height);
@@ -368,62 +269,36 @@ button {
     background: var(--bg-body);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 40px;
-    padding-left: 30px;
+    padding: 40px 30px;
     transform: translateX(100%);
-    /* Hidden off-screen to the right */
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 999;
 }
 
 .mobile-menu.active {
     transform: translateX(0);
-    /* Slide in */
-}
-
-.mobile-menu ul {
-    list-style: none;
-    text-align: left;
-    width: 100%;
 }
 
 .mobile-menu a {
     display: block;
-    font-size: 2rem;
-    margin: 20px 0;
+    font-size: 1.8rem;
+    margin: 15px 0;
     font-weight: 700;
-    position: relative;
-}
-
-/* Section Spacing */
-.section {
-    padding: 80px 0;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    text-align: center;
     color: var(--primary);
 }
 
-/* 
-   HERO SECTION
-   Large banner area at the top.
-*/
+/* Hero Section */
 .hero-section {
     position: relative;
-    z-index: 1;
-    /* Creates stacking context to keep negative z-index children visible */
-    height: 45vh;
+    height: 70vh;
+    /* Taller on mobile for better impact */
     min-height: 400px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
     margin: 10px;
     border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-bg {
@@ -433,16 +308,9 @@ button {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center center;
+    background-position: 65% center;
+    z-index: 1;
     transition: transform 10s ease;
-    z-index: -2;
-}
-
-/* Mobile optimization for studio image */
-@media (max-width: 768px) {
-    .hero-bg {
-        background-position: 65% center;
-    }
 }
 
 .hero-section:hover .hero-bg {
@@ -456,39 +324,35 @@ button {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(90, 0, 105, 0.7) 0%, rgba(26, 26, 26, 0.5) 100%);
+    z-index: 2;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    color: #ffffff;
     text-align: center;
-    max-width: 800px;
+    color: #ffffff;
+    max-width: 90%;
+    z-index: 3;
 }
 
 .hero-content h2 {
-    font-size: 4rem;
+    font-size: 2.5rem;
     line-height: 1.1;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
     opacity: 0.9;
 }
 
-/* 
-   BENTO GRID (Portfolio)
-   Uses CSS Grid to create a masonry-like layout.
-*/
+/* Portfolio Grid */
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 equal columns */
-    grid-template-rows: repeat(2, 300px);
-    /* 2 fixed-height rows */
+    grid-template-columns: 1fr;
+    /* 1 Column on Mobile */
     gap: 20px;
+    /* Auto height for rows handled by content */
 }
 
 .bento-item {
@@ -498,35 +362,20 @@ button {
     position: relative;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    height: 250px;
+    /* Fixed height for consistency */
     transition: var(--transition);
-}
-
-.bento-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.bento-content {
-    /* Deprecated but kept for safety if needed, though we rely on bento-visual now */
-    width: 100%;
-    height: 100%;
 }
 
 .bento-visual {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    position: relative;
 }
 
 .bento-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 0.3s;
 }
 
@@ -534,7 +383,6 @@ button {
     transform: scale(1.05);
 }
 
-/* Text Container (Common) */
 .bento-text {
     position: absolute;
     bottom: 0;
@@ -543,24 +391,18 @@ button {
     padding: 20px;
     z-index: 2;
     color: white;
-    transition: opacity 0.3s;
 }
 
-/* Variant: Text visible on hover (Boxes 2-6) */
+/* Text Variants */
 .text-hover {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    opacity: 0;
+    opacity: 1;
+    /* Visible on mobile by default for better UX */
     display: flex;
     align-items: flex-end;
 }
 
-.bento-item:hover .text-hover {
-    opacity: 1;
-}
-
-/* Variant: Text always visible (Box 1) */
 .text-always-visible {
-    opacity: 1;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -569,136 +411,86 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--primary);
-    font-size: 20px;
-    backdrop-filter: blur(5px);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 18px;
     z-index: 3;
 }
 
-.bento-item:hover .play-icon {
-    transform: translate(-50%, -50%) scale(1.2);
-    background: #fff;
-}
-
-/* About Section */
+/* About & Services */
 .about-container {
-    padding: 40px;
     background-color: var(--bg-card);
     border-radius: var(--radius-lg);
-    font-family: 'Quicksand', sans-serif;
+    padding: 30px 20px;
 }
 
 .about-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin: 0 auto 20px auto;
-    /* Centered with bottom margin */
-    max-width: 70%;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    max-width: 100%;
 }
 
-@media (max-width: 768px) {
-    .about-text p {
-        max-width: 90%;
-    }
-}
-
-/* 
-   CLIENTS SECTION
-   Cards for client testimonials/social proof.
-*/
+/* Clients */
 .clients-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 40px;
+    grid-template-columns: 1fr;
+    gap: 30px;
 }
 
 .client-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
+    gap: 10px;
 }
 
 .client-scroll-box {
     width: 100%;
+    max-width: 300px;
+    /* Limit width */
     aspect-ratio: 1 / 1.25;
-    /* Height is 25% larger than width */
     overflow-y: auto;
-    /* Vertical scroll */
     background: var(--bg-card);
     border-radius: var(--radius-md);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border: 2px solid #cba3d4;
-    /* Purple border matching footer */
     padding: 5px;
-    /* Breathing room for the image */
-
-    /* Scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) transparent;
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .client-scroll-box::-webkit-scrollbar {
-    width: 6px;
-}
-
-.client-scroll-box::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 3px;
-}
-
-.client-scroll-box::-webkit-scrollbar-track {
-    background: transparent;
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .client-scroll-box img {
     width: 100%;
     display: block;
-    height: auto;
 }
 
-.client-caption {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-align: center;
-}
-
-/* Mobile Responsive for Clients */
-@media (max-width: 768px) {
-    .clients-grid {
-        grid-template-columns: 1fr;
-        /* Stack vertically on mobile */
-        gap: 60px;
-    }
-}
-
-
-
-/* Contact / CTA */
-.cta-section {
-    text-align: center;
-}
-
+/* Contact */
 .contact-box {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     gap: 15px;
-    margin: 10px;
     padding: 20px;
     background: var(--bg-card);
     border-radius: var(--radius-md);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-contact {
+    width: 100%;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
 }
 
 .btn-telegram {
@@ -711,41 +503,32 @@ button {
     color: white;
 }
 
-@media (max-width: 600px) {
-    .contact-box {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-
 /* Footer */
 footer {
     background-color: #cba3d4;
     color: var(--text-main);
-    padding: 60px 0 20px;
-    margin-top: 50px;
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
+    padding: 40px 0 20px;
+    margin-top: 40px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    text-align: center;
 }
 
 .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .footer-nav {
     display: flex;
-    gap: 20px;
-}
-
-.footer-nav a:hover {
-    color: var(--accent);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 .social-links {
     display: flex;
+    justify-content: center;
     gap: 15px;
 }
 
@@ -757,50 +540,140 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: var(--transition);
 }
 
-.social-icon:hover {
-    background-color: var(--accent);
-    color: var(--text-main);
+/* --- 6. DESKTOP MEDIA QUERIES (Min-Width) --- */
+@media (min-width: 768px) {
+
+    /* Header */
+    .desktop-nav {
+        display: block;
+    }
+
+    .desktop-nav ul {
+        display: flex;
+        gap: 30px;
+    }
+
+    .desktop-nav a:hover {
+        color: var(--primary);
+    }
+
+    #mobile-menu-btn {
+        display: none;
+    }
+
+    /* Hero */
+    .hero-section {
+        height: 50vh;
+    }
+
+    .hero-bg {
+        background-position: center center;
+    }
+
+    .hero-content h2 {
+        font-size: 4rem;
+    }
+
+    .hero-content p {
+        font-size: 1.5rem;
+    }
+
+    /* Portfolio */
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 300px);
+    }
+
+    .bento-item {
+        height: 100%;
+    }
+
+    /* Hover effects only on desktop */
+    .text-hover {
+        opacity: 0;
+    }
+
+    .bento-item:hover .text-hover {
+        opacity: 1;
+    }
+
+    /* About */
+    .about-text p {
+        max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.1rem;
+    }
+
+    /* Clients */
+    .clients-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Contact */
+    .contact-box {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .btn-contact {
+        width: auto;
+        min-width: 200px;
+    }
+
+    /* Footer Compact Desktop */
+    footer {
+        padding: 15px 0;
+        margin-top: 20px;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .footer-nav {
+        gap: 25px;
+    }
+
+    .copyright {
+        margin: 0;
+        font-size: 0.85rem;
+    }
 }
 
-.copyright {
-    font-size: 0.9rem;
-    opacity: 0.5;
-}
-
-/* 
-   MODAL Styles
-   Overlay that covers the whole screen to show projects.
-*/
+/* --- 7. MODALS & GALLERIES --- */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.95);
     z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    /* Not clickable when hidden */
     transition: opacity 0.3s ease;
 }
 
 .modal.active {
     opacity: 1;
     pointer-events: auto;
-    /* Clickable when active */
 }
 
 .modal-content {
+    background: var(--bg-card);
     width: 90%;
-    height: 90%;
-    background-color: var(--bg-card);
+    max-width: 1000px;
+    height: 90vh;
     border-radius: var(--radius-lg);
     position: relative;
     display: flex;
@@ -811,490 +684,136 @@ footer {
 .close-modal {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 20px;
     font-size: 2rem;
-    z-index: 10;
     color: var(--text-main);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-body {
     flex: 1;
+    overflow-y: auto;
     display: flex;
-    height: 100%;
+    flex-direction: column;
 }
 
 .viewer-container {
     flex: 1;
+    background: #000;
     display: flex;
-    /* Logic for Centering + Scrolling */
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: #000;
-    color: white;
-
-    /* Discreet Scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: #555 #1a1a1a;
-}
-
-.viewer-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.viewer-container::-webkit-scrollbar-track {
-    background: #1a1a1a;
-}
-
-.viewer-container::-webkit-scrollbar-thumb {
-    background-color: #555;
-    border-radius: 4px;
-}
-
-/* Ensure content is centered when small, but accessible when large */
-.viewer-container>* {
-    margin: auto;
-    /* width: 100%;  <-- Removing this to allow "shrink wrap" centering if needed, 
-                          but galleries usually want full width available. 
-                          Let's trust margin: auto. */
-    min-height: min-content;
-    /* Helps with some flex bugs */
-}
-
-/* 
-   DYNAMIC GALLERY STYLES 
-   Classes used by JS generated galleries
-*/
-.gallery-grid,
-.gallery-flex-container {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    /* Center items horizontally */
-    gap: 15px;
-    padding: 20px;
-    width: 100%;
-}
-
-.gallery-flex-container {
-    /* Specific tweaks for grouped galleries if needed */
-    padding: 10px 0;
-}
-
-.gallery-img {
-    height: 180px;
-    /* Fixed height for consistent grid rows */
-    width: auto;
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.gallery-img:hover {
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
 }
 
 .modal-gallery-strip {
-    width: 150px;
-    background-color: var(--bg-body);
-    padding: 20px;
-    padding-top: 60px;
-    /* Space for close button */
+    height: 100px;
+    background: var(--bg-body);
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    overflow-y: auto;
+    gap: 10px;
+    padding: 10px;
+    overflow-x: auto;
+    flex-shrink: 0;
 }
 
 .strip-thumb {
-    width: 100%;
-    aspect-ratio: 1;
-    background-color: #ccc;
-    border-radius: var(--radius-sm);
-    border: 2px solid transparent;
+    width: 140px;
+    /* Video default */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.2s;
     cursor: pointer;
-    transition: var(--transition);
 }
 
 .strip-thumb.active,
 .strip-thumb:hover {
-    border-color: var(--primary);
-    transform: scale(1.05);
-}
-
-/* 
-   RESPONSIVE QUERIES
-   Adapts the layout for smaller screens (Tablets/Phones).
-*/
-@media (max-width: 900px) {
-    .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 columns on tablets */
-        grid-template-rows: auto;
-    }
-
-
-}
-
-@media (max-width: 768px) {
-
-    /* Hide desktop nav, show hamburger */
-    .desktop-nav {
-        display: none;
-    }
-
-    #mobile-menu-btn {
-        display: flex;
-    }
-
-    .section {
-        padding: 64px 0;
-        /* Reduced by 20% from 80px */
-    }
-
-    .hero-content h2 {
-        font-size: 2.5rem;
-    }
-
-    .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 cols = 50% width */
-        grid-auto-rows: auto;
-        /* Allow rows to grow for text below */
-        gap: 15px;
-        /* Spacing between cards */
-    }
-
-    .bento-item {
-        height: auto !important;
-        /* Allow growing */
-        background: transparent;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        overflow: visible;
-        /* Allow text to be outside */
-    }
-
-    .bento-visual {
-        height: 150px;
-        /* Fixed height for image part (75% reduction logic) */
-        width: 100%;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Text below the card */
-    .bento-text {
-        position: static;
-        width: 100%;
-        padding: 8px 0 0 0;
-        background: none !important;
-        opacity: 1 !important;
-        color: var(--text-main);
-        text-shadow: none !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .bento-text h3 {
-        font-size: 0.85rem;
-        /* Smaller font for mobile title */
-        font-weight: 600;
-        margin: 0;
-    }
-
-    /* Box 1 subtitle hidden */
-    .text-always-visible p {
-        display: none;
-    }
-
-    .play-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 14px;
-    }
-
-
-
-    /* Modal adjusts to vertical layout */
-    .modal-body {
-        flex-direction: column;
-    }
-
-    .modal-gallery-strip {
-        width: 100%;
-        height: 100px;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 10px;
-    }
-
-    .strip-thumb {
-        height: 100%;
-        width: auto;
-    }
-}
-
-/* 
-   FAB (Floating Action Button)
-   Fixed contact button at bottom right.
-*/
-.fab-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
-}
-
-.fab-main-wrapper {
-    position: relative;
-    width: 60px;
-    height: 60px;
-}
-
-.fab-main {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
-
-.fab-main:hover {
-    transform: scale(1.05);
-}
-
-.fab-trigger {
-    position: absolute;
-    top: -10px;
-    right: -5px;
-    width: 24px;
-    height: 24px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 3;
-    color: var(--primary);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
-}
-
-.fab-trigger:hover {
-    background: var(--accent);
-    transform: scale(1.1);
-}
-
-.fab-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(20px) scale(0.8);
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom center;
-}
-
-.fab-menu.active {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
+    border: 2px solid var(--primary);
 }
 
-.fab-option {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    color: white;
+/* Gallery Styles (Previously social.css) */
+.gallery-grid {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+.gallery-img {
+    height: 200px;
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
 }
 
-.fab-option:hover {
-    transform: scale(1.1);
+.gallery-img:hover {
+    transform: scale(1.02);
+    z-index: 2;
 }
 
-/* App Colors used for the buttons */
-.app-whatsapp,
-[data-app="whatsapp"] {
-    background-color: #25D366;
-}
-
-.app-telegram,
-[data-app="telegram"] {
-    background-color: #0088cc;
-}
-
-.app-messenger,
-[data-app="messenger"] {
-    background-color: #00B2FF;
-}
-
-@media (max-width: 480px) {
-    .fab-container {
-        right: 20px;
-        bottom: 20px;
-        transform: scale(0.75);
-        /* Slightly smaller on phones */
-        transform-origin: bottom right;
-    }
-}
-
-/* 
-   SOCIAL MEDIA GALLERY
-   Specific styles for Box 3 "Social Media"
-*/
-.social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    /* Scroll inside the viewer if content overflows */
-}
-
-.social-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-.social-img:hover {
-    transform: scale(1.03);
-}
-
-.social-sidebar-item {
-    width: 100%;
-    aspect-ratio: 1;
-    background-color: #333;
-    background-position: center;
+/* Sidebar Item for Grouped Galleries */
+.gallery-sidebar-item {
+    width: 80px;
+    height: 80px;
     background-size: cover;
+    background-position: center;
     border-radius: 8px;
-    border: 3px solid transparent;
+    margin-right: 10px;
+    flex-shrink: 0;
+    opacity: 0.7;
     cursor: pointer;
-    transition: var(--transition);
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.social-sidebar-item:hover,
-.social-sidebar-item.active {
-    border-color: var(--primary);
-    transform: scale(1.05);
-}
-
-/* Tooltip on hover for sidebar items */
-.social-sidebar-item::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.social-sidebar-item:hover::after {
+.gallery-sidebar-item.active {
     opacity: 1;
+    border: 2px solid var(--primary);
 }
 
-/* 
-   VIDEO EDITING MODAL (Box 1)
-   Specific styles for the vertical video container (Shoorts/Reels)
-*/
+/* Video Container */
 .video-container-vertical {
     width: 100%;
+    height: 100%;
     max-width: 400px;
-    /* Optimal size for vertical video on desktop */
+    /* Phone shape */
     aspect-ratio: 9 / 16;
-    background: #000;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    position: relative;
 }
 
 .video-container-vertical iframe {
     width: 100%;
     height: 100%;
-    border: none;
-    display: block;
 }
 
-/* Mobile Adjustment: Ensure it doesn't overflow height-wise */
-@media (max-width: 768px) {
-    .video-container-vertical {
-        max-width: 100%;
-        max-height: 60vh;
-        /* Prevent it from being taller than screen */
-        aspect-ratio: 9 / 16;
-        margin: 0 auto;
-    }
-}
-
-/* 
-   LIGHTBOX (Full Screen Image Viewer)
-   Overlay that appears when clicking a gallery image.
-*/
+/* Lightbox */
 .lightbox {
     position: fixed;
-    z-index: 9999;
-    /* Highest priority */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    /* Translucent black */
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 3000;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
 }
 
 .lightbox.active {
@@ -1303,87 +822,151 @@ footer {
 }
 
 .lightbox-content {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 90vh;
     object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s;
 }
 
 .close-lightbox {
     position: absolute;
     top: 20px;
-    right: 30px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    font-size: 4rem;
-    z-index: 10020;
-    /* Highest priority */
-    /* Large X */
-    font-weight: 300;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3010;
     cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-    line-height: 1;
-    font-family: sans-serif;
-    background: transparent;
-    border: none;
-    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s;
 }
 
 .close-lightbox:hover {
-    color: var(--primary);
-    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .lightbox-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.4);
-    /* Low opacity */
-    cursor: pointer;
-    padding: 20px;
-    z-index: 10010;
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    padding: 10px;
+    color: white;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .lightbox-arrow:hover {
-    color: #ffffff;
-    /* Brighten on hover */
-    transform: translateY(-50%) scale(1.2);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .lightbox-arrow-left {
-    left: 10px;
+    left: 20px;
 }
 
 .lightbox-arrow-right {
-    right: 10px;
+    right: 20px;
 }
 
 .arrow-icon {
-    width: 60px;
-    height: 60px;
-    stroke: currentColor;
-    stroke-width: 1.5;
+    width: 30px;
+    height: 30px;
     fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-@media (max-width: 768px) {
-    .lightbox-arrow {
-        padding: 5px;
-    }
+/* FAB */
+.fab-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 
-    .arrow-icon {
-        width: 40px;
-        height: 40px;
-    }
+.fab-main-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.fab-main {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.fab-main:hover {
+    transform: scale(1.1);
+}
+
+.fab-trigger {
+    background: var(--bg-card);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s;
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+
+.fab-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.fab-option {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fab-option[data-app="whatsapp"] {
+    background-color: #25D366;
+}
+
+.fab-option[data-app="telegram"] {
+    background-color: #0088cc;
+}
+
+.fab-option[data-app="messenger"] {
+    background-color: #00B2FF;
 }
